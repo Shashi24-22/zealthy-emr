@@ -58,15 +58,15 @@ export default function LoginPage() {
           <div className="border-t pt-4">
             <p className="text-xs text-gray-400 mb-2 text-center">Demo accounts</p>
             <div className="flex gap-2">
-              <button onClick={() => fillDemo('mark@example.com', 'Password123!')}
+              <button onClick={() => fillDemo('mark@some-email-provider.net', 'Password123!')}
                 className="flex-1 text-xs bg-gray-100 hover:bg-gray-200 rounded p-2 text-left transition-colors">
                 <div className="font-medium">Mark Johnson</div>
-                <div className="text-gray-400">mark@example.com</div>
+                <div className="text-gray-400">mark@some-email-provider.net</div>
               </button>
-              <button onClick={() => fillDemo('lisa@example.com', 'Password123!')}
+              <button onClick={() => fillDemo('lisa@some-email-provider.net', 'Password123!')}
                 className="flex-1 text-xs bg-gray-100 hover:bg-gray-200 rounded p-2 text-left transition-colors">
                 <div className="font-medium">Lisa Smith</div>
-                <div className="text-gray-400">lisa@example.com</div>
+                <div className="text-gray-400">lisa@some-email-provider.net</div>
               </button>
             </div>
           </div>
