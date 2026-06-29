@@ -30,40 +30,69 @@ export default function NewPatientPage() {
   }
 
   return (
-    <div className="max-w-lg space-y-4">
-      <div className="text-sm text-gray-400">
-        <Link href="/admin" className="hover:text-gray-700">← Patients</Link> / New patient
+    <div className="max-w-xl space-y-6">
+      <div className="flex items-center gap-2 text-sm text-gray-400">
+        <Link href="/admin" className="hover:text-gray-700">Patients</Link>
+        <span>/</span>
+        <span className="text-gray-700">New patient</span>
       </div>
-      <h1 className="text-xl font-bold">New patient</h1>
 
-      <form onSubmit={submit} className="card p-6 space-y-4">
-        <div>
-          <label className="label">Full name *</label>
-          <input className="field" value={form.name} onChange={e => set('name', e.target.value)} required placeholder="Jane Doe" />
-        </div>
-        <div>
-          <label className="label">Email *</label>
-          <input className="field" type="email" value={form.email} onChange={e => set('email', e.target.value)} required placeholder="jane@example.com" />
-        </div>
-        <div>
-          <label className="label">Portal password *</label>
-          <input className="field" type="password" value={form.password} onChange={e => set('password', e.target.value)} required placeholder="Min 6 chars" minLength={6} />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">New patient</h1>
+        <p className="text-gray-400 text-sm mt-1">Create a record and set portal login credentials</p>
+      </div>
+
+      <form onSubmit={submit} className="card p-8 space-y-5">
+        <div className="grid grid-cols-2 gap-5">
+          <div className="col-span-2">
+            <label className="label">Full name *</label>
+            <input className="field" value={form.name}
+              onChange={e => set('name', e.target.value)} required placeholder="Jane Doe" />
+          </div>
+          <div className="col-span-2">
+            <label className="label">Email address *</label>
+            <input className="field" type="email" value={form.email}
+              onChange={e => set('email', e.target.value)} required placeholder="jane@example.com" />
+          </div>
+          <div className="col-span-2">
+            <label className="label">Portal password *</label>
+            <input className="field" type="password" value={form.password}
+              onChange={e => set('password', e.target.value)} required placeholder="Min 6 characters" minLength={6} />
+            <p className="text-xs text-gray-400 mt-1">Patient uses this to log into the portal</p>
+          </div>
           <div>
             <label className="label">Phone</label>
-            <input className="field" value={form.phone} onChange={e => set('phone', e.target.value)} placeholder="(555) 000-0000" />
+            <input className="field" value={form.phone}
+              onChange={e => set('phone', e.target.value)} placeholder="(555) 000-0000" />
           </div>
           <div>
             <label className="label">Date of birth</label>
-            <input className="field" value={form.dateOfBirth} onChange={e => set('dateOfBirth', e.target.value)} placeholder="MM/DD/YYYY" />
+            <input className="field" value={form.dateOfBirth}
+              onChange={e => set('dateOfBirth', e.target.value)} placeholder="MM/DD/YYYY" />
           </div>
         </div>
 
-        {error && <p className="text-red-600 text-sm">{error}</p>}
+        {error && (
+          <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-lg">
+            <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {error}
+          </div>
+        )}
 
-        <div className="flex gap-2 pt-1">
-          <button type="submit" className="btn-blue" disabled={saving}>{saving ? 'Creating…' : 'Create patient'}</button>
+        <div className="flex gap-3 pt-2">
+          <button type="submit" className="btn-blue" disabled={saving}>
+            {saving ? (
+              <span className="flex items-center gap-2">
+                <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                </svg>
+                Creating…
+              </span>
+            ) : 'Create patient'}
+          </button>
           <Link href="/admin" className="btn-gray">Cancel</Link>
         </div>
       </form>

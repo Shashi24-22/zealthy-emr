@@ -22,11 +22,31 @@ export default async function PatientPage({ params }) {
 
   return (
     <div className="space-y-6">
-      <div className="text-sm text-gray-400">
-        <Link href="/admin" className="hover:text-gray-700">← Patients</Link> / {patient.name}
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-2 text-sm text-gray-400">
+        <Link href="/admin" className="hover:text-gray-700">Patients</Link>
+        <span>/</span>
+        <span className="text-gray-700">{patient.name}</span>
       </div>
 
-      <h1 className="text-xl font-bold">{patient.name}</h1>
+      {/* Patient header */}
+      <div className="card p-6">
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+            <span className="text-blue-700 font-bold text-xl">
+              {patient.name.split(' ').map(n => n[0]).join('').slice(0,2)}
+            </span>
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">{patient.name}</h1>
+            <p className="text-gray-400 text-sm">{patient.email}</p>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="badge-blue">{patient.appointments.length} appointments</span>
+              <span className="badge-purple">{patient.prescriptions.length} prescriptions</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <PatientEditor patient={patient} />
       <AppointmentsManager patientId={id} appointments={patient.appointments} />
